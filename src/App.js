@@ -18,22 +18,23 @@ function App() {
   //USeEffect
   useEffect(() => {
     //console.log("hey");
+    const filterHandler = () => {
+      switch (status) {
+        case "completed":
+          setFilteredTodos(todos.filter((todo) => todo.completed === true));
+          break;
+        case "uncompleted":
+          setFilteredTodos(todos.filter((todo) => todo.completed === false));
+          break;
+        default:
+          setFilteredTodos(todos);
+          break;
+      }
+    };
     filterHandler();
   }, [todos, status]);
   //Function
-  const filterHandler = () => {
-    switch (status) {
-      case "completed":
-        setFilteredTodos(todos.filter((todo) => todo.completed === true));
-        break;
-      case "uncompleted":
-        setFilteredTodos(todos.filter((todo) => todo.completed === false));
-        break;
-      default:
-        setFilteredTodos(todos);
-        break;
-    }
-  };
+  
   //Save to local
   const saveLocalTodos = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
